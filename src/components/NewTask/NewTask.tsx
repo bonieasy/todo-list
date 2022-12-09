@@ -3,6 +3,13 @@ import { useState } from 'react';
 import { Container } from './style';
 
 export function NewTask() {
+
+    const [task, setTask] = useState('tarefa teste')
+
+    function handleNewTask() {
+
+    }
+
     
     return(
         <Container>
@@ -10,7 +17,6 @@ export function NewTask() {
             <a href='#'>
             Criar
                 <PlusCircle size={16} />
-                
             </a>
         </Container>
     );
