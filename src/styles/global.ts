@@ -33,7 +33,7 @@ body, input, button {
 
 p {
     letter-spacing: 0.9px;
-    line-height: 1.2;
+    //line-height: 1.2;
 }
 
 a {

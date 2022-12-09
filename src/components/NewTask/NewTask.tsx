@@ -1,7 +1,9 @@
 import { PlusCircle } from 'phosphor-react';
+import { useState } from 'react';
 import { Container } from './style';
 
 export function NewTask() {
+    
     return(
         <Container>
             <input placeholder='Adicione uma nova tarefa'></input>
