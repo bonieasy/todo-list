@@ -29,6 +29,7 @@ body {
 body, input, button {
     font-family: 'Inter', sans-serif;
     font-weight: 400;
+    border: none;
 }
 
 p {
