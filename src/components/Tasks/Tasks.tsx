@@ -9,16 +9,18 @@ export function Tasks() {
 
     const [textTask, setTextTask] = useState<any>([]);
 
-    const handleCreateNewTask = (event: FormEvent<HTMLFormElement>) => {
+    function handleCreateNewTask (event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
         setTextTask((tasks: any) => [...tasks, {
             id: uuidV4(),
             title: event.target.taskName.value,
-            isCompleted: false,
+            isCompleted: true,
         }]);
-        //event.target.taskName.value = ''; -> pq está dando erro?
-        //event.target.taskName.focus();
+        //console.log(event.target.taskName.value);
+        //setTextTask('');
+        console.log(uuidV4());
     }
+
     function deleteTask(taskToDelete: string) {
         const tasksWithoutDeletedOne = textTask.filter((task: string) => {
             return task !== taskToDelete;
@@ -59,6 +61,7 @@ export function Tasks() {
                     content={task.title}
                     isCompleted={task.isCompleted}
                     key={uuidV4()}
+                    id={task.id}
                     onDeleteTask={deleteTask}
                 />))
             }
