@@ -3,12 +3,20 @@ import styled from "styled-components";
 export const Container = styled.div`
     color: var(--gray-100);
     margin: 4.313rem 22rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
  
 .info-tasks {
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
-        margin: 4.313rem 15rem 1.5rem;
+        justify-content: center;
+        align-items: center;
+        gap: 26rem;
+        width: 46rem;
+        //margin: 4.313rem 15rem 1.5rem;
 }
 .created {
         display: flex;
@@ -72,7 +80,8 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    //gap: 0.75rem
+    align-items: center;
+    gap: 0.75rem
 }
 `;
 export const NewTask = styled.form`

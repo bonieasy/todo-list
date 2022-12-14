@@ -1,23 +1,25 @@
-import { Circle, Trash } from 'phosphor-react';
+import { CheckCircle, Circle, Trash } from 'phosphor-react';
 import { TaskList } from './style';
 
-interface TaskProps {
+export interface TaskProps {
     content: string;
     onDeleteTask: (task: string) => void;
+    isCompleted?: boolean;
   }
 
-export function TaskBox({ content, onDeleteTask }: TaskProps) {
+export function TaskBox({ content, onDeleteTask, isCompleted }: TaskProps) {
 
     function handleDeleteTask () {
         onDeleteTask(content);
     }
     return(
-        <TaskList>
-                <button className='circle-button'>
-                    <Circle size={32} color="#4ea8de" />
-                </button>
+        <TaskList className={`${isCompleted ? 'task-completed' : ''}`}>
+            
+                {isCompleted ?
+                <CheckCircle className="circle" size={32} weight="fill" color="#8284FA" /> :
+                <Circle className="circle" size={32} color="##4EA8DE" />}
 
-                 <p>{content}</p>
+                 <span>{content}</span>
 
                 <button onClick={handleDeleteTask} className='trash-button' title='delete task'>
                     <Trash size={24} color="#808080" />

@@ -1,28 +1,31 @@
 import { PlusCircle } from 'phosphor-react';
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { Empty } from '../Empty';
 import { TaskBox } from '../TaskBox/TaskBox';
 import { NewTask, Container } from './style';
+import { v4 as uuidV4 } from 'uuid';
 
 export function Tasks() {
 
     const [textTask, setTextTask] = useState<any>([]);
 
-    const handleCreateNewTask = event => {
+    const handleCreateNewTask = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        setTextTask(tasks => [...tasks, event.target.taskName.value]);
-
+        setTextTask((tasks: any) => [...tasks, {
+            id: uuidV4(),
+            title: event.target.taskName.value,
+            isCompleted: false,
+        }]);
         //event.target.taskName.value = ''; -> pq está dando erro?
-        event.target.taskName.focus();
-        //console.log(event.target.taskName.value);
+        //event.target.taskName.focus();
     }
-
     function deleteTask(taskToDelete: string) {
         const tasksWithoutDeletedOne = textTask.filter((task: string) => {
             return task !== taskToDelete;
         })
         setTextTask(tasksWithoutDeletedOne);
     }
+    
     return (
         <Container>
         <NewTask onSubmit={handleCreateNewTask} >
@@ -51,7 +54,13 @@ export function Tasks() {
 
         <div className='bloco'>
             {
-                textTask.map((task, index) => <TaskBox content={task} key={index} onDeleteTask={deleteTask} />)
+                textTask.map((task: any) => (
+                <TaskBox
+                    content={task.title}
+                    isCompleted={task.isCompleted}
+                    key={uuidV4()}
+                    onDeleteTask={deleteTask}
+                />))
             }
         </div>
         <Empty />
