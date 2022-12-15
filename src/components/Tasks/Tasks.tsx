@@ -1,37 +1,62 @@
-import { PlusCircle } from 'phosphor-react';
-import { FormEvent, useState } from 'react';
+import { PlusCircle, Target } from 'phosphor-react';
+import { ChangeEvent, FormEvent, InvalidEvent, useState } from 'react';
 import { Empty } from '../Empty';
 import { TaskBox } from '../TaskBox/TaskBox';
 import { NewTask, Container } from './style';
 import { v4 as uuidV4 } from 'uuid';
 
 export function Tasks() {
+// estado = variaveis que eu quero que o componente monitore.
+//primeira posicao vamos ter uma variavel que vamos usar para mostrar a variavel em tela
+//na segunda posicao, recebemos uma funcao pra eu alterar o vamos da variavel de task
+    const [task, setTask] = useState<any>([]);
+    const [newTextTask, setNewTextTask] = useState('');
 
-    const [textTask, setTextTask] = useState<any>([]);
 
     function handleCreateNewTask (event: FormEvent<HTMLFormElement>) {
-        event.preventDefault();
-        setTextTask((tasks: any) => [...tasks, {
+        event.preventDefault(); //Previne evento padrao do Submit
+
+        setTask((tasks: any) => [...tasks, {
             id: uuidV4(),
             title: event.target.taskName.value,
             isCompleted: true,
         }]);
-        //console.log(event.target.taskName.value);
-        //setTextTask('');
-        console.log(uuidV4());
+        event.target.taskName.focus();
+
+        setNewTextTask('');
+
+        //const result = (event.target as HTMLInputElement).value;
+        //console.log(result);
     }
 
-    function deleteTask(taskToDelete: string) {
-        const tasksWithoutDeletedOne = textTask.filter((task: string) => {
-            return task !== taskToDelete;
-        })
-        setTextTask(tasksWithoutDeletedOne);
+    function handleNewTaskChange(event: ChangeEvent<HTMLInputElement>) {
+        event.target.setCustomValidity('');
+        setNewTextTask(event.target.value);
     }
-    
+
+    function handleNewTaskInvalid(event: InvalidEvent<HTMLInputElement>) {
+        event.target.setCustomValidity('Esse campo é obrigatório!');
+      }
+
+    function deleteTask(ID: string) {
+        //imutabilidade
+        //criamos uma nova lista de tarefas, sem o item deletado
+        const tasksWithoutDeletedOne = task.filter((task: { id: string; }) => task.id !== ID)
+        setTask(tasksWithoutDeletedOne);
+
+        //console.log(`Deletar a tarefa: ${ID}`);
+    }
     return (
         <Container>
         <NewTask onSubmit={handleCreateNewTask} >
-            <input name="taskName" placeholder='Adicione uma nova tarefa' />
+            <input
+                name="taskName"
+                placeholder='Adicione uma nova tarefa'
+                value={newTextTask}
+                onChange={handleNewTaskChange}
+                onInvalid={handleNewTaskInvalid}
+                required
+            />
             <button type='submit' >
                 Create
                 <PlusCircle size={16} />
@@ -56,7 +81,8 @@ export function Tasks() {
 
         <div className='bloco'>
             {
-                textTask.map((task: any) => (
+                //Vou percorrer o array de tasks e pra cada task eu retorno um component
+                task.map((task: any) => (
                 <TaskBox
                     content={task.title}
                     isCompleted={task.isCompleted}

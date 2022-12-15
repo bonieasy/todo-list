@@ -2,7 +2,7 @@ import { CheckCircle, Circle, Trash } from 'phosphor-react';
 import { TaskList } from './style';
 
 export interface TaskProps {
-    id: string;
+    id?: string;
     content: string;
     onDeleteTask: (id: string) => void;
     isCompleted?: boolean;
@@ -11,6 +11,7 @@ export interface TaskProps {
 export function TaskBox({ content, onDeleteTask, isCompleted, id }: TaskProps) {
 
     function handleDeleteTask () {
+        //console.log('task to delete');
         onDeleteTask(id);
     }
     return(
