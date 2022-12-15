@@ -1,4 +1,4 @@
-import { PlusCircle, Target } from 'phosphor-react';
+import { PlusCircle, Target, TestTube } from 'phosphor-react';
 import { ChangeEvent, FormEvent, InvalidEvent, useState } from 'react';
 import { Empty } from '../Empty';
 import { TaskBox } from '../TaskBox/TaskBox';
@@ -19,14 +19,14 @@ export function Tasks() {
         setTask((tasks: any) => [...tasks, {
             id: uuidV4(),
             title: event.target.taskName.value,
-            isCompleted: true,
+            isCompleted: false,
         }]);
         event.target.taskName.focus();
 
         setNewTextTask('');
 
         //const result = (event.target as HTMLInputElement).value;
-        //console.log(result);
+        //console.log(task.length);
     }
 
     function handleNewTaskChange(event: ChangeEvent<HTMLInputElement>) {
@@ -68,7 +68,7 @@ export function Tasks() {
                     <strong>
                         Tarefas Criadas:
                     </strong>
-                    <p>5</p>
+                    <p>{task.length}</p>
                 </div>
 
                 <div className='done'>
