@@ -3,10 +3,9 @@ import { TaskList } from './style';
 
 export interface TaskProps {
     id: string;
-    //task: any;
     content: string;
-    onDeleteTask: (id: string) => void;
     isCompleted: boolean;
+    onDeleteTask: (id: string) => void;
     onCompleteTask: (id: string) => void;
   }
 

@@ -49,7 +49,7 @@ export function Tasks() {
     }
 
     function toggleState(idToToggleTaskState: string) {
-        const taskToToggle = task.map((task) => {
+        const taskToToggle = task.map((task: { id: string; isCompleted: boolean; }) => {
             if (task.id === idToToggleTaskState) {
               task.isCompleted = !task.isCompleted;
               return task;
@@ -58,8 +58,11 @@ export function Tasks() {
             }
           });
           setTask(taskToToggle);
-
     }
+    
+    const tasksConclued = task.filter((task: { isCompleted: boolean; }) => {
+        return task.isCompleted === true;
+      }).length;
 
     return (
         <Container>
@@ -90,7 +93,9 @@ export function Tasks() {
                     <strong>
                         Concluidas
                     </strong>
-                    <p>2 de 5</p>
+                    <p>
+                    {task.length === 0 ? tasksConclued : `${tasksConclued} de ${task.length}`}
+                    </p>
                 </div>
             </div>
 
