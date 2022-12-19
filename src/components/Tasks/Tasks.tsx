@@ -69,7 +69,7 @@ export function Tasks() {
         <NewTask onSubmit={handleCreateNewTask} >
             <input
                 name="taskName"
-                placeholder='Adicione uma nova tarefa'
+                placeholder='Add a new task'
                 value={newTextTask}
                 onChange={handleNewTaskChange}
                 onInvalid={handleNewTaskInvalid}
@@ -84,17 +84,17 @@ export function Tasks() {
 
                 <div className='created'>
                     <strong>
-                        Tarefas Criadas:
+                        Created Tasks:
                     </strong>
                     <p>{task.length}</p>
                 </div>
 
                 <div className='done'>
                     <strong>
-                        Concluidas
+                        Completed
                     </strong>
                     <p>
-                    {task.length === 0 ? tasksConclued : `${tasksConclued} de ${task.length}`}
+                    {task.length === 0 ? tasksConclued : `${tasksConclued} out of ${task.length}`}
                     </p>
                 </div>
             </div>

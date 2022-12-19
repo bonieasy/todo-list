@@ -14,7 +14,7 @@ export const Container = styled.div`
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        gap: 26rem;
+        gap: 25rem;
         width: 46rem;
         //margin: 4.313rem 15rem 1.5rem;
 }

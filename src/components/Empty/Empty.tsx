@@ -5,8 +5,8 @@ export function Empty() {
     return(
         <BoxEmpty>
             <ClipboardText size={56} weight="light" />
-            <strong>Você ainda não tem tarefas cadastradas</strong>
-            <p>Crie tarefas e organize seus itens a fazer</p>
+            <strong>You have no tasks yet</strong>
+            <p>Create tasks and organize your to-do items</p>
         </BoxEmpty>
     );
 }
