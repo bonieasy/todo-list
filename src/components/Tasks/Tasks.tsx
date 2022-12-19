@@ -1,9 +1,10 @@
 import { PlusCircle, Target, TestTube } from 'phosphor-react';
 import { ChangeEvent, FormEvent, InvalidEvent, useState } from 'react';
-import { Empty } from '../Empty';
+import { Empty } from '../Empty/Empty';
 import { TaskBox } from '../TaskBox/TaskBox';
 import { NewTask, Container } from './style';
 import { v4 as uuidV4 } from 'uuid';
+import styled from 'styled-components';
 
 export function Tasks() {
 // estado = variaveis que eu quero que o componente monitore.
@@ -26,7 +27,7 @@ export function Tasks() {
         setNewTextTask('');
 
         //const result = (event.target as HTMLInputElement).value;
-        //console.log(task.length);
+        console.log(task);
     }
 
     function handleNewTaskChange(event: ChangeEvent<HTMLInputElement>) {
@@ -36,7 +37,7 @@ export function Tasks() {
 
     function handleNewTaskInvalid(event: InvalidEvent<HTMLInputElement>) {
         event.target.setCustomValidity('Esse campo é obrigatório!');
-      }
+    }
 
     function deleteTask(ID: string) {
         //imutabilidade
@@ -46,6 +47,20 @@ export function Tasks() {
 
         //console.log(`Deletar a tarefa: ${ID}`);
     }
+
+    function toggleState(idToToggleTaskState: string) {
+        const taskToToggle = task.map((task) => {
+            if (task.id === idToToggleTaskState) {
+              task.isCompleted = !task.isCompleted;
+              return task;
+            } else {
+              return task;
+            }
+          });
+          setTask(taskToToggle);
+
+    }
+
     return (
         <Container>
         <NewTask onSubmit={handleCreateNewTask} >
@@ -84,16 +99,17 @@ export function Tasks() {
                 //Vou percorrer o array de tasks e pra cada task eu retorno um component
                 task.map((task: any) => (
                 <TaskBox
+                    //task={task} 
                     content={task.title}
                     isCompleted={task.isCompleted}
                     key={uuidV4()}
                     id={task.id}
                     onDeleteTask={deleteTask}
+                    onCompleteTask={toggleState}
                 />))
             }
         </div>
-        <Empty />
-
+            {task.length === 0 ? <Empty /> : ""}
         </Container>
     )
 }

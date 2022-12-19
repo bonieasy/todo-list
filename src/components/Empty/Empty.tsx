@@ -1,7 +1,6 @@
 import { ClipboardText } from "phosphor-react";
 import { BoxEmpty } from './style';
 
-
 export function Empty() {
     return(
         <BoxEmpty>
