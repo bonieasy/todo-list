@@ -13,8 +13,7 @@ export function Tasks() {
     const [task, setTask] = useState<any>([]);
     const [newTextTask, setNewTextTask] = useState('');
 
-
-    function handleCreateNewTask (event: FormEvent<HTMLFormElement>) {
+    function handleCreateNewTask (event: any) {
         event.preventDefault(); //Previne evento padrao do Submit
 
         setTask((tasks: any) => [...tasks, {
@@ -25,9 +24,6 @@ export function Tasks() {
         event.target.taskName.focus();
 
         setNewTextTask('');
-
-        //const result = (event.target as HTMLInputElement).value;
-        console.log(task);
     }
 
     function handleNewTaskChange(event: ChangeEvent<HTMLInputElement>) {
