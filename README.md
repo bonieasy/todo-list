@@ -4,7 +4,7 @@
 Task control application, where you can add new tasks, mark and unmark them as completed, delete a task from the list, and display the progress of task completion
 
   
-Click <a href="https://bonieasy.github.io/ToDo-list/" target="_blank"> here </a> to access
+Click <a href="https://bonieasy.github.io/todo-list/" target="_blank"> here </a> to access
 
 <img src="./to.do-list.png" width="680px" >
 
